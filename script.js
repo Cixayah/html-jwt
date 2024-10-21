@@ -1,54 +1,91 @@
-const URL = 'http://cix-api.vercel.app/auth/login';
+const LOGIN_URL = 'https://cix-api.vercel.app/auth/login';
+const REGISTER_URL = 'https://cix-api.vercel.app/auth/register';
 
-document.getElementById('loginForm').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Impede o envio padrão do formulário
+const authForm = document.getElementById('authForm');
+const formTitle = document.getElementById('formTitle');
+const submitButton = document.getElementById('submitButton');
+const toggleForm = document.getElementById('toggleForm');
+const messageElement = document.getElementById('message');
+const nameField = document.getElementById('nameField');
+const confirmPasswordField = document.getElementById('confirmPasswordField');
 
-    const credentials = {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value
-    };
+// Variável de controle para alternar entre Login e Registro
+let isRegistering = false;
 
-    try {
-        const response = await fetch(URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-        });
-
-        const data = await response.json();
-        console.log(data);
-
-        // Exibir mensagem de sucesso ou erro
-        const messageElement = document.getElementById('message');
-        if (response.ok) {
-            // Armazenar o token no LocalStorage ou SessionStorage
-            localStorage.setItem('token', data.token);
-            messageElement.innerHTML = '<div class="alert alert-success">Login bem-sucedido!</div>';
-
-            // Aqui pode add redirecionar para outra página ou executar outra ação
-            // window.location.href = 'outraPagina.html';
-        } else {
-            messageElement.innerHTML = '<div class="alert alert-danger">Erro ao fazer login. Tente novamente.</div>';
-        }
-    } catch (error) {
-        console.error('Erro:', error);
-        document.getElementById('message').innerHTML = '<div class="alert alert-danger">Erro ao conectar com o servidor.</div>';
+// Alternar entre Login e Registro
+toggleForm.addEventListener('click', () => {
+    isRegistering = !isRegistering;
+    if (isRegistering) {
+        formTitle.innerText = 'Registrar';
+        submitButton.innerText = 'Registrar';
+        toggleForm.innerText = 'Já tem uma conta? Entrar';
+        nameField.style.display = 'block';
+        confirmPasswordField.style.display = 'block';
+    } else {
+        formTitle.innerText = 'Login';
+        submitButton.innerText = 'Entrar';
+        toggleForm.innerText = 'Registrar';
+        nameField.style.display = 'none';
+        confirmPasswordField.style.display = 'none';
     }
 });
 
-// Função para verificar o token
-function verificarToken() {
-    const token = localStorage.getItem('token');
-    if (token) {
-        console.log('Token encontrado:', token);
-        // adicionar lógica para validar o token ou decodificá-lo
-        // por exemplo, verificar sua expiração
-    } else {
-        console.log('Nenhum token encontrado. Usuário não autenticado.');
-    }
-}
+// Manipulador de envio do formulário
+authForm.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Impede o envio padrão do formulário
 
-// Chamar a função de verificação de token ao carregar a página
-verificarToken();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (isRegistering) {
+        // Registro
+        const name = document.getElementById('name').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            messageElement.innerHTML = '<div class="text-red-500">As senhas não coincidem.</div>';
+            return;
+        }
+
+        try {
+            const response = await fetch(REGISTER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password, confirmPassword })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                messageElement.innerHTML = '<div class="text-green-500">Registro bem-sucedido! Faça login.</div>';
+                toggleForm.click(); // Voltar para o formulário de login
+            } else {
+                messageElement.innerHTML = `<div class="text-red-500">${data.message || 'Erro ao registrar.'}</div>`;
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            messageElement.innerHTML = '<div class="text-red-500">Erro ao conectar com o servidor.</div>';
+        }
+    } else {
+        // Login
+        try {
+            const response = await fetch(LOGIN_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                messageElement.innerHTML = '<div class="text-green-500">Login bem-sucedido!</div>';
+                // Redirecionar ou executar outra ação, se necessário
+                // window.location.href = 'outraPagina.html';
+            } else {
+                messageElement.innerHTML = `<div class="text-red-500">${data.message || 'Erro ao fazer login.'}</div>`;
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            messageElement.innerHTML = '<div class="text-red-500">Erro ao conectar com o servidor.</div>';
+        }
+    }
+});
