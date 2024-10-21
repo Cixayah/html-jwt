@@ -1,4 +1,4 @@
-const URL = 'https://cix-api.vercel.app/auth/login';
+const URL = 'http://cix-api.vercel.app/auth/login';
 
 document.getElementById('loginForm').addEventListener('submit', async (event) => {
     event.preventDefault(); // Impede o envio padrão do formulário
