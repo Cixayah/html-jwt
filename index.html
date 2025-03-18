@@ -7,45 +7,45 @@
     <title>Página de Login e Registro</title>
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body class="bg-gray-100">
+<body>
     <div class="flex items-center justify-center h-screen">
-        <div class="bg-white p-8 rounded-lg shadow-md w-96">
-            <h1 id="formTitle" class="text-2xl font-semibold text-center mb-6">Login</h1>
-
+        <div class="form-container p-8 rounded-lg w-96">
+            <h1 id="formTitle" class="title-text text-2xl font-bold text-center mb-6">Login</h1>
             <!-- Formulário de Login e Registro -->
             <form id="authForm">
                 <div class="mb-4" id="nameField" style="display: none;">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Nome:</label>
-                    <input type="text" id="name" class="mt-1 p-2 border border-gray-300 rounded w-full">
+                    <label for="name" class="block text-sm font-bold mb-1">Nome:</label>
+                    <input type="text" id="name" class="input-field mt-1 p-3 rounded w-full">
                 </div>
                 <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
-                    <input type="email" id="email" required class="mt-1 p-2 border border-gray-300 rounded w-full">
+                    <label for="email" class="block text-sm font-bold mb-1">Email:</label>
+                    <input type="email" id="email" required class="input-field mt-1 p-3 rounded w-full">
                 </div>
                 <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Senha:</label>
-                    <input type="password" id="password" required class="mt-1 p-2 border border-gray-300 rounded w-full">
+                    <label for="password" class="block text-sm font-bold mb-1">Senha:</label>
+                    <input type="password" id="password" required class="input-field mt-1 p-3 rounded w-full">
                 </div>
                 <div class="mb-4" id="confirmPasswordField" style="display: none;">
-                    <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar Senha:</label>
-                    <input type="password" id="confirmPassword" class="mt-1 p-2 border border-gray-300 rounded w-full">
+                    <label for="confirmPassword" class="block text-sm font-bold mb-1">Confirmar Senha:</label>
+                    <input type="password" id="confirmPassword" class="input-field mt-1 p-3 rounded w-full">
                 </div>
-
-                <button type="submit"
-                    class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition" id="submitButton">Entrar</button>
+                <button type="submit" class="primary-button w-full p-3 rounded font-bold mt-2"
+                    id="submitButton">Entrar</button>
             </form>
-
-            <div class="text-center mt-4">
-                <button id="toggleForm" class="text-blue-500 hover:underline">Registrar</button>
+            <div class="text-center mt-6">
+                <button id="toggleForm" class="toggle-button hover:underline">Registrar</button>
             </div>
-
             <div id="message" class="text-center mt-4"></div>
         </div>
     </div>
-
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

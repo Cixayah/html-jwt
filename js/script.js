@@ -18,7 +18,7 @@ toggleForm.addEventListener('click', () => {
     if (isRegistering) {
         formTitle.innerText = 'Registrar';
         submitButton.innerText = 'Registrar';
-        toggleForm.innerText = 'Já tem uma conta? Entrar';
+        toggleForm.innerText = 'Entrar';
         nameField.style.display = 'block';
         confirmPasswordField.style.display = 'block';
     } else {
@@ -77,7 +77,7 @@ authForm.addEventListener('submit', async (event) => {
             const data = await response.json();
             if (response.ok) {
                 localStorage.setItem('token', data.token);
-                messageElement.innerHTML = '<div class="text-green-500">Login bem-sucedido!</div>';
+                messageElement.innerHTML = '<div class="text-green-800">Logifan bem-sucedido!</div>';
                 // Redirecionar ou executar outra ação, se necessário
                 // window.location.href = 'outraPagina.html';
             } else {

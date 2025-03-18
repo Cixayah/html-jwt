@@ -1,0 +1,87 @@
+:root {
+  --midnight-bg: #0a0b11f1;
+  --midnight-card: #13141f;
+  --midnight-border: #1f212e;
+  --dracula-green: #39d35f;
+  --dracula-bright-green: #07e947;
+  --dracula-white: #d6d6d6;
+  --dracula-grey: #7e7e7e;
+}
+
+body {
+  background-color: var(--midnight-bg);
+  color: var(--dracula-green);
+  font-family: 'Fira Code', monospace;
+  font-weight: bold;
+}
+
+.form-container {
+  background-color: var(--midnight-card);
+  border: 1px solid var(--midnight-border);
+  box-shadow: 0 4px 20px #0000009f, 0 0 15px #50fa7b26;
+}
+
+.input-field {
+  background-color: var(--midnight-bg);
+  border: 1px solid var(--midnight-border);
+  color: var(--dracula-green);
+  font-weight: bold;
+  caret-color: var(--dracula-green);
+}
+
+.input-field:focus {
+  border-color: var(--dracula-green);
+  outline: none;
+  box-shadow: 0 0 0 2px #50fa7b33;
+}
+
+.primary-button {
+  background-color: var(--midnight-border);
+  border: 1px solid var(--dracula-green);
+  color: var(--dracula-bright-green);
+  font-weight: bold;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.primary-button:hover {
+  background-color: var(--dracula-green);
+  color: var(--midnight-bg);
+  box-shadow: 0 0 10px #50fa7b66;
+}
+
+.toggle-button {
+  color: var(--dracula-white);
+  font-weight: bold;
+}
+
+.toggle-button:hover {
+  color: var(--dracula-white);
+  text-shadow: 0 0 5px #ff79c680;
+  text-decoration: none;
+}
+
+.title-text {
+  color: var(--dracula-bright-green);
+  text-shadow: 0 0 8px #50fa7b80;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Cursor piscante no título */
+.title-text::after {
+  content: '_';
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
