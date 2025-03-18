@@ -15,6 +15,13 @@ body {
   font-weight: bold;
 }
 
+.title-text {
+  color: var(--color-green);
+  text-shadow: 0 0 8px var(--color-purple);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
 .form-container {
   background-color: var(--midnight-card);
   border: 1px solid var(--midnight-border);
@@ -60,13 +67,6 @@ body {
   color: var(--color-green);
   text-shadow: 0 0 5px var(--color-purple);
   text-decoration: none;
-}
-
-.title-text {
-  color: var(--color-white);
-  text-shadow: 0 0 8px var(--color-purple);
-  letter-spacing: 2px;
-  text-transform: uppercase;
 }
 
 /* Cursor piscante no título */
