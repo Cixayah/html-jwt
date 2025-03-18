@@ -5,12 +5,12 @@
   --color-purple: rgb(101, 50, 197);
   --color-red: #990000;
   --color-white: #d6d6d6;
-  --color-grey: #7e7e7e;
+  --color-green: #00dd37;
 }
 
 body {
   background-color: var(--midnight-bg);
-  color: var(--color-red);
+  color: var(--color-green);
   font-family: 'Fira Code', monospace;
   font-weight: bold;
 }
@@ -57,7 +57,7 @@ body {
 }
 
 .toggle-button:hover {
-  color: var(--color-white);
+  color: var(--color-green);
   text-shadow: 0 0 5px var(--color-purple);
   text-decoration: none;
 }

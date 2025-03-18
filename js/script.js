@@ -77,7 +77,7 @@ authForm.addEventListener('submit', async (event) => {
             const data = await response.json();
             if (response.ok) {
                 localStorage.setItem('token', data.token);
-                messageElement.innerHTML = '<div class="text-green-100">Login bem-sucedido!</div>';
+                messageElement.innerHTML = '<div class="text-[00dd37]">Login bem-sucedido!</div>';
                 // Redirecionar ou executar outra ação, se necessário
                 // window.location.href = 'outraPagina.html';
             } else {
