@@ -2,15 +2,15 @@
   --midnight-bg: #0a0b11f1;
   --midnight-card: #13141f;
   --midnight-border: #1f212e;
-  --dracula-green: #39d35f;
-  --dracula-bright-green: #07e947;
-  --dracula-white: #d6d6d6;
-  --dracula-grey: #7e7e7e;
+  --color-purple: rgb(101, 50, 197);
+  --color-red: #990000;
+  --color-white: #d6d6d6;
+  --color-grey: #7e7e7e;
 }
 
 body {
   background-color: var(--midnight-bg);
-  color: var(--dracula-green);
+  color: var(--color-red);
   font-family: 'Fira Code', monospace;
   font-weight: bold;
 }
@@ -18,27 +18,27 @@ body {
 .form-container {
   background-color: var(--midnight-card);
   border: 1px solid var(--midnight-border);
-  box-shadow: 0 4px 20px #0000009f, 0 0 15px #50fa7b26;
+  box-shadow: 0 4px 20px #0000009f, 0 0 35px var(--color-purple);
 }
 
 .input-field {
   background-color: var(--midnight-bg);
   border: 1px solid var(--midnight-border);
-  color: var(--dracula-green);
+  color: var(--color-white);
   font-weight: bold;
-  caret-color: var(--dracula-green);
+  caret-color: var(--color-white);
 }
 
 .input-field:focus {
-  border-color: var(--dracula-green);
+  border-color: var(--color-purple);
   outline: none;
-  box-shadow: 0 0 0 2px #50fa7b33;
+  box-shadow: 0 0 0 2px var(--color-purple);
 }
 
 .primary-button {
   background-color: var(--midnight-border);
-  border: 1px solid var(--dracula-green);
-  color: var(--dracula-bright-green);
+  border: 1px solid var(--color-purple);
+  color: var(--color-white);
   font-weight: bold;
   transition: all 0.2s ease;
   text-transform: uppercase;
@@ -46,25 +46,25 @@ body {
 }
 
 .primary-button:hover {
-  background-color: var(--dracula-green);
+  background-color: var(--color-purple);
   color: var(--midnight-bg);
-  box-shadow: 0 0 10px #50fa7b66;
+  box-shadow: 0 0 10px var(--color-purple);
 }
 
 .toggle-button {
-  color: var(--dracula-white);
+  color: var(--color-white);
   font-weight: bold;
 }
 
 .toggle-button:hover {
-  color: var(--dracula-white);
-  text-shadow: 0 0 5px #ff79c680;
+  color: var(--color-white);
+  text-shadow: 0 0 5px var(--color-purple);
   text-decoration: none;
 }
 
 .title-text {
-  color: var(--dracula-bright-green);
-  text-shadow: 0 0 8px #50fa7b80;
+  color: var(--color-white);
+  text-shadow: 0 0 8px var(--color-purple);
   letter-spacing: 2px;
   text-transform: uppercase;
 }
