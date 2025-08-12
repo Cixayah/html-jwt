@@ -76,10 +76,26 @@ authForm.addEventListener('submit', async (event) => {
 
             const data = await response.json();
             if (response.ok) {
-                localStorage.setItem('token', data.token);
-                messageElement.innerHTML = '<div class="text-[00dd37]">Login bem-sucedido!</div>';
-                // Redirecionar ou executar outra ação, se necessário
-                // window.location.href = 'outraPagina.html';
+                setJwtCookie(data.token);
+                messageElement.innerHTML = '<div class="text-green-500">Login bem-sucedido!</div>';
+                // Example: fetch authenticated user data
+                fetchAuthenticatedUser();
+                // Example function that uses JWT to fetch authenticated user data
+                async function fetchAuthenticatedUser() {
+                    try {
+                        // Replace with your real protected endpoint URL
+                        const USER_URL = 'https://cix-api.vercel.app/auth/me';
+                        const response = await fetchWithAuth(USER_URL);
+                        if (response.ok) {
+                            const user = await response.json();
+                            messageElement.innerHTML += `<div class="text-blue-500">Authenticated user: ${user.name || user.email || JSON.stringify(user)}</div>`;
+                        } else {
+                            messageElement.innerHTML += '<div class="text-red-500">Could not fetch authenticated user data.</div>';
+                        }
+                    } catch (error) {
+                        messageElement.innerHTML += '<div class="text-red-500">Error fetching authenticated user.</div>';
+                    }
+                }
             } else {
                 messageElement.innerHTML = `<div class="text-red-500">${data.message || 'Erro ao fazer login.'}</div>`;
             }
@@ -89,3 +105,26 @@ authForm.addEventListener('submit', async (event) => {
         }
     }
 });
+
+// Utilitário para salvar o token JWT em cookie seguro
+function setJwtCookie(token) {
+    // Expira em 1 dia, ajustável conforme necessário
+    const expires = new Date(Date.now() + 86400 * 1000).toUTCString();
+    document.cookie = `jwt=${token}; expires=${expires}; path=/; SameSite=Strict`;
+}
+
+// Utilitário para ler o token JWT do cookie
+function getJwtFromCookie() {
+    const match = document.cookie.match(/(?:^|; )jwt=([^;]*)/);
+    return match ? decodeURIComponent(match[1]) : null;
+}
+
+// Exemplo de uso do token em requisições autenticadas:
+async function fetchWithAuth(url, options = {}) {
+    const token = getJwtFromCookie();
+    if (!options.headers) options.headers = {};
+    if (token) {
+        options.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return fetch(url, options);
+}
