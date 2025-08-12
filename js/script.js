@@ -88,7 +88,7 @@ authForm.addEventListener('submit', async (event) => {
                         const response = await fetchWithAuth(USER_URL);
                         if (response.ok) {
                             const user = await response.json();
-                            messageElement.innerHTML += `<div class="text-blue-500">Authenticated user: ${user.name || user.email || JSON.stringify(user)}</div>`;
+                            messageElement.innerHTML += `<div class="text-blue-500">Usuário autenticado: ${user.name || user.email || JSON.stringify(user)}</div>`;
                         } else {
                             messageElement.innerHTML += '<div class="text-red-500">Could not fetch authenticated user data.</div>';
                         }
